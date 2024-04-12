@@ -1,0 +1,51 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "west init",
+            "type": "shell",
+            "command": "west init ~/workspace/zephyrproject"
+        },
+        {
+            "label": "west update",
+            "type": "shell",
+            "command": "west update",
+            "options": {
+                "cwd": "${workspaceFolder}/zephyrproject"
+            },
+        },
+        {
+            "label": "west zephyr-export",
+            "type": "shell",
+            "command": "west zephyr-export",
+            "options": {
+                "cwd": "${workspaceFolder}/zephyrproject/zephyr"
+            },
+        },
+        {
+            "label": "install dependencies",
+            "type": "shell",
+            "command": "pip3 install -r ~/workspace/zephyrproject/zephyr/scripts/requirements.txt"
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "west",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "args":[
+                "build",
+                "--board", "rpi_pico",
+                "-d", "../build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+        }
+    ]
+}
